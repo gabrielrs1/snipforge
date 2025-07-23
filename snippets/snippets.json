@@ -1,0 +1,71 @@
+{
+  "Request outbound method": {
+    "prefix": "business-operation-method",
+    "body": [
+      "Method Example(pRequest As bplus.leveapp.admin.gerenciamento.bo.example.msg.ExampleRequest, oResponse As bplus.leveapp.admin.gerenciamento.bo.example.msg.ExampleResponse) As %String",
+      "{",
+      "\tSet tSC = $$\\$OK\n",
+      "\tTry {",
+      "\t\tset tURL = ..Adapter.URL_\"/pokemon/ditto\"",
+      "\t\tSet tHttpRequest = ##class(%Net.HttpRequest).%New()",
+      "\t\tSet tHttpRequest.SSLConfiguration = ..Adapter.SSLConfig\n",
+      "\t\tDo tHttpRequest.SetHeader(\"teste-header\", pRequest.UserId)",
+      "\t\tDo tHttpRequest.SetParam(\"teste-param\", pRequest.PermitirCPF)\n",
+      "\t\tSet tSC = ..Adapter.SendFormDataArray(.tHttpResponse,\"GET\",tHttpRequest,,,tURL)\n",
+      "\t\tSet oResponse = ##class(bplus.leveapp.admin.gerenciamento.bo.example.msg.ExampleResponse).%New()",
+      "\t\tIf \\$IsObject(tHttpResponse) {",
+      "\t\t\t$$\\$THROWONERROR(tSC, ##class(bplus.leveapp.util.Base).FormatarRetorno(.tRetorno, tHttpResponse))",
+      "\t\t\tSet oResponse.StatusCode = tHttpResponse.StatusCode",
+      "\t\t\tSet oResponse.MsgRetorno = tRetorno",
+      "\t\t}",
+      "\t\tElse {",
+      "\t\t\tSet oResponse.StatusCode = 500",
+      "\t\t}",
+      "\t} Catch tException {",
+      "\t\tSet:'$$\\$ISERR(tSC) tSC = tException.AsStatus()",
+      "\t}\n",
+      "\tQuit tSC",
+      "}\n"
+    ],
+    "description": "Request operation method."
+  },
+  "XData Map": {
+    "prefix": "XData",
+    "body": [
+      "XData UrlMap",
+      "{",
+      "<Routes>",
+      "\t<Map  Prefix=\"/auth\"   Forward=\"bplus.leveapp.autenticacao.wss.Router\" />",
+      "</Routes>",
+      "}"
+    ],
+    "description": "XData Map for message mapping."
+  },
+  "XData Url": {
+    "prefix": "XData",
+    "body": [
+      "XData UrlMap",
+      "{",
+      "<Routes>",
+      "\t<Route  Url=\"/info/:id\"  Method=\"GET\"  Call=\"ObterPermissoesUsuario\"   Cors=\"true\" />",
+      "</Routes>",
+      "}"
+    ],
+    "description": "XData Url for message mapping."
+  },
+  "ListOfDataTypes Class New": {
+    "prefix": "ListOfDataTypes",
+    "body": ["Set obj = ##class(%Library.ListOfDataTypes).%New()"],
+    "description": "Create a new instance of %Library.ListOfDataTypes."
+  },
+  "DynamicArray Class New": {
+    "prefix": "DynamicArray",
+    "body": ["Set array = ##class(%Library.DynamicArray).%New()"],
+    "description": "Create a new instance of %Library.DynamicArray."
+  },
+  "DynamicObject Class New": {
+    "prefix": "DynamicObject",
+    "body": ["Set obj = ##class(%Library.DynamicObject).%New()"],
+    "description": "Create a new instance of %Library.DynamicObject."
+  }
+}
