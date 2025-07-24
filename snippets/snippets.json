@@ -5,7 +5,7 @@
       "XData UrlMap",
       "{",
       "<Routes>",
-      "\t<Map  Prefix=\"/auth\"   Forward=\"autenticacao.wss.Router\" />",
+      "\t<Map  Prefix=\"/auth\"   Forward=\"authentication.wss.Router\" />",
       "</Routes>",
       "}"
     ],
@@ -17,11 +17,21 @@
       "XData UrlMap",
       "{",
       "<Routes>",
-      "\t<Route  Url=\"/info/:id\"  Method=\"GET\"  Call=\"ObterPermissoes\"   Cors=\"true\" />",
+      "\t<Route  Url=\"/user/:id\"  Method=\"GET\"  Call=\"GetUserById\"   Cors=\"true\" />",
       "</Routes>",
       "}"
     ],
     "description": "XData Url for message mapping."
+  },
+  "Route Map": {
+    "prefix": "Route",
+    "body": ["<Map  Prefix=\"/auth\"   Forward=\"authentication.wss.Router\" />"],
+    "description": "Create a new route map for XData."
+  },
+  "Route Url": {
+    "prefix": "Route",
+    "body": ["<Route  Url=\"/info/:id\"  Method=\"GET\"  Call=\"GetUserById\"   Cors=\"true\" />"],
+    "description": "Create a new route URL for XData."
   },
   "ListOfDataTypes Class New": {
     "prefix": "ListOfDataTypes",
@@ -37,5 +47,131 @@
     "prefix": "DynamicObject",
     "body": ["Set obj = ##class(%Library.DynamicObject).%New()"],
     "description": "Create a new instance of %Library.DynamicObject."
+  },
+  "SQL Statement": {
+    "prefix": "SQL Statement", 
+    "body": [
+      "Set statement = ##class(%SQL.Statement).%New()",
+      "$$\\$THROWONERROR(statusCode, statement.%Prepare(sql))",
+      "Set result = statement.%Execute(pUserId)"
+    ],
+    "description": "Prepare and execute a SQL statement."
+  },
+  "While Statement": {
+    "prefix": "While", 
+    "body": [
+      "While (result.%Next(.statusCode)) {",
+      "\tThrow:$$\\$ISERR(statusCode)",
+      "}"
+    ],
+    "description": "Iterate through SQL result set."
+  },
+  "SQL Table": {
+    "prefix": "SQL",
+    "body": [
+      "kill tTabSql",
+      "Set tTabSql = 3",
+      "Set tTabSql(1) = \"SELECT ID, Nome\"",
+      "Set tTabSql(2) = \"FROM teste.User\"",
+      "Set tTabSql(3) = \"WHERE ID = ?\""
+    ],
+    "description": "Define SQL table structure."
+  },
+  "While Array Iterator": {
+    "prefix": "While",
+    "body": [
+      "Set groups = groups.%GetIterator()\n",
+      "While (groups.%GetNext(.key, .value)) {",
+      "}"
+    ],
+    "description": "Iterate through an array using an iterator."
+  },
+  "Throw Especific Error": {
+    "prefix": "Throw",
+    "body": [
+      "$$\\$THROWONERROR(statusCode, $$\\$ERROR(5001, \"Your message\"))"
+    ],
+    "description": "Throw an error with a specific status code and message."
+  },
+  "TryCatch Exception": {
+    "prefix": "TryCatch",
+    "body": [
+      "Try {",
+      "Catch exception {",
+      "\tSet:'$$\\$ISERR(statusCode) statusCode = exception.AsStatus()",
+      "}"
+    ],
+    "description": "Handle exceptions in a try-catch block."
+  },
+  "System Get Error": {
+    "prefix": "System",
+    "body": [
+      "\\$SYSTEM.Status.GetErrorText(statusCode)"
+    ],
+    "description": "Get error text from status code."
+  },
+  "Class Save": {
+    "prefix": "Class",
+    "body": [
+      "$$\\$THROWONERROR(statusCode, user.%Save())"
+    ],
+    "description": "Save an instance of teste.User."
+  },
+  "Class Exists": {
+    "prefix": "Class",
+    "body": [
+      "If (##class(teste.User).IdxEmailExists(email)) {",
+      "}"
+    ],
+    "description": "Check if an instance of teste.User exists by index email."
+  },
+  "Class Index Open": {
+    "prefix": "Class",
+    "body": [
+      "Set user = ##class(teste.User).IdxEmailOpen(email)"
+    ],
+    "description": "Open an instance of teste.User by index email."
+  },
+  "Class Open": {
+    "prefix": "Class",
+    "body": [
+      "Set user = ##class(teste.User).%OpenId(id)"
+    ],
+    "description": "Open an instance of teste.User by ID."
+  },
+  "Class New": {
+    "prefix": "Class",
+    "body": [
+      "Set user = ##class(teste.User).%New()"
+    ],
+    "description": "Create a new instance of teste.User."
+  },
+  "Parse Array": {
+    "prefix": "Parse",
+    "body": [
+      "[].%FromJSON(json)"
+    ],
+    "description": "Parse string from JSON to array."
+  },
+  "Parse JSON": {
+    "prefix": "Parse",
+    "body": [
+      "{}.%FromJSON(json)"
+    ],
+    "description": "Parse string from JSON to object."
+  },
+  "Request Header": {
+    "prefix": "Header",
+    "body": [
+      "Set user  = %request.GetCgiEnv(\"HTTP_USERID\")"
+    ],
+    "description": "GET request header."
+  },
+  "Request Param": {
+    "prefix": "Param",
+    "body": [
+      "Set user = $Get(%request.Data(\"user\", 1), \"\")"
+    ],
+    "description": "GET request parameter."
   }
 }

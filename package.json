@@ -1,9 +1,9 @@
 {
   "name": "snipforge",
   "displayName": "SnipForge",
-  "description": "",
+  "description": "Snippets for ObjectScript development.",
   "publisher": "GabrielSantos",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "engines": {
     "vscode": "^1.102.0"
   },
@@ -44,7 +44,23 @@
     },
     "snippets": [
       {
+        "language": "objectscript",
+        "path": "./snippets/snippets.json"
+      },
+      {
         "language": "objectscript-class",
+        "path": "./snippets/snippets.json"
+      },
+      {
+        "language": "objectscript-csp",
+        "path": "./snippets/snippets.json"
+      },
+      {
+        "language": "objectscript-int",
+        "path": "./snippets/snippets.json"
+      },
+      {
+        "language": "objectscript-macros",
         "path": "./snippets/snippets.json"
       }
     ]
