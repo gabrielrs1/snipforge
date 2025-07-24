@@ -1,41 +1,11 @@
 {
-  "Request outbound method": {
-    "prefix": "business-operation-method",
-    "body": [
-      "Method Example(pRequest As bplus.leveapp.admin.gerenciamento.bo.example.msg.ExampleRequest, oResponse As bplus.leveapp.admin.gerenciamento.bo.example.msg.ExampleResponse) As %String",
-      "{",
-      "\tSet tSC = $$\\$OK\n",
-      "\tTry {",
-      "\t\tset tURL = ..Adapter.URL_\"/pokemon/ditto\"",
-      "\t\tSet tHttpRequest = ##class(%Net.HttpRequest).%New()",
-      "\t\tSet tHttpRequest.SSLConfiguration = ..Adapter.SSLConfig\n",
-      "\t\tDo tHttpRequest.SetHeader(\"teste-header\", pRequest.UserId)",
-      "\t\tDo tHttpRequest.SetParam(\"teste-param\", pRequest.PermitirCPF)\n",
-      "\t\tSet tSC = ..Adapter.SendFormDataArray(.tHttpResponse,\"GET\",tHttpRequest,,,tURL)\n",
-      "\t\tSet oResponse = ##class(bplus.leveapp.admin.gerenciamento.bo.example.msg.ExampleResponse).%New()",
-      "\t\tIf \\$IsObject(tHttpResponse) {",
-      "\t\t\t$$\\$THROWONERROR(tSC, ##class(bplus.leveapp.util.Base).FormatarRetorno(.tRetorno, tHttpResponse))",
-      "\t\t\tSet oResponse.StatusCode = tHttpResponse.StatusCode",
-      "\t\t\tSet oResponse.MsgRetorno = tRetorno",
-      "\t\t}",
-      "\t\tElse {",
-      "\t\t\tSet oResponse.StatusCode = 500",
-      "\t\t}",
-      "\t} Catch tException {",
-      "\t\tSet:'$$\\$ISERR(tSC) tSC = tException.AsStatus()",
-      "\t}\n",
-      "\tQuit tSC",
-      "}\n"
-    ],
-    "description": "Request operation method."
-  },
   "XData Map": {
     "prefix": "XData",
     "body": [
       "XData UrlMap",
       "{",
       "<Routes>",
-      "\t<Map  Prefix=\"/auth\"   Forward=\"bplus.leveapp.autenticacao.wss.Router\" />",
+      "\t<Map  Prefix=\"/auth\"   Forward=\"autenticacao.wss.Router\" />",
       "</Routes>",
       "}"
     ],
@@ -47,7 +17,7 @@
       "XData UrlMap",
       "{",
       "<Routes>",
-      "\t<Route  Url=\"/info/:id\"  Method=\"GET\"  Call=\"ObterPermissoesUsuario\"   Cors=\"true\" />",
+      "\t<Route  Url=\"/info/:id\"  Method=\"GET\"  Call=\"ObterPermissoes\"   Cors=\"true\" />",
       "</Routes>",
       "}"
     ],
