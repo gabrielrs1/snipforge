@@ -1,5 +1,7 @@
 # Snipforge
 
+This extension provide some snippets of the code Intersystems IRIS for you.
+
 ## XData
 - XData Map for message mapping.
 - XData Url for message mapping.
