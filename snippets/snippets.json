@@ -72,7 +72,7 @@
       "kill tTabSql",
       "Set tTabSql = 3",
       "Set tTabSql(1) = \"SELECT ID, Nome\"",
-      "Set tTabSql(2) = \"FROM teste.User\"",
+      "Set tTabSql(2) = \"FROM test.User\"",
       "Set tTabSql(3) = \"WHERE ID = ?\""
     ],
     "description": "Define SQL table structure."
@@ -80,8 +80,8 @@
   "While Array Iterator": {
     "prefix": "While",
     "body": [
-      "Set groups = groups.%GetIterator()\n",
-      "While (groups.%GetNext(.key, .value)) {",
+      "Set ${1} = ${2}.%GetIterator()\n",
+      "While (${3}.%GetNext(.key, .value)) {",
       "}"
     ],
     "description": "Iterate through an array using an iterator."
@@ -89,7 +89,7 @@
   "Throw Especific Error": {
     "prefix": "Throw",
     "body": [
-      "$$\\$THROWONERROR(statusCode, $$\\$ERROR(5001, \"Your message\"))"
+      "$$\\$THROWONERROR(statusCode, $$\\$ERROR(5001, ${1}))"
     ],
     "description": "Throw an error with a specific status code and message."
   },
@@ -113,14 +113,14 @@
   "Class Save": {
     "prefix": "Class",
     "body": [
-      "$$\\$THROWONERROR(statusCode, user.%Save())"
+      "$$\\$THROWONERROR(statusCode, ${1}.%Save())"
     ],
     "description": "Save an instance of teste.User."
   },
   "Class Exists": {
     "prefix": "Class",
     "body": [
-      "If (##class(teste.User).IdxEmailExists(email)) {",
+      "If (##class(${1}).IdxEmailExists(${2})) {",
       "}"
     ],
     "description": "Check if an instance of teste.User exists by index email."
@@ -128,50 +128,183 @@
   "Class Index Open": {
     "prefix": "Class",
     "body": [
-      "Set user = ##class(teste.User).IdxEmailOpen(email)"
+      "Set ${1} = ##class(${2}).IdxEmailOpen(${3})"
     ],
     "description": "Open an instance of teste.User by index email."
   },
   "Class Open": {
     "prefix": "Class",
     "body": [
-      "Set user = ##class(teste.User).%OpenId(id)"
+      "Set ${1} = ##class(${2}).%OpenId(${3})"
     ],
     "description": "Open an instance of teste.User by ID."
   },
   "Class New": {
     "prefix": "Class",
     "body": [
-      "Set user = ##class(teste.User).%New()"
+      "Set ${1} = ##class(${2}).%New()"
     ],
     "description": "Create a new instance of teste.User."
   },
   "Parse Array": {
     "prefix": "Parse",
     "body": [
-      "[].%FromJSON(json)"
+      "[].%FromJSON(${1})"
     ],
     "description": "Parse string from JSON to array."
   },
   "Parse JSON": {
     "prefix": "Parse",
     "body": [
-      "{}.%FromJSON(json)"
+      "{}.%FromJSON(${1})"
     ],
     "description": "Parse string from JSON to object."
   },
   "Request Header": {
     "prefix": "Header",
     "body": [
-      "Set user  = %request.GetCgiEnv(\"HTTP_USERID\")"
+      "Set ${1}  = %request.GetCgiEnv(\"${2}\")"
     ],
     "description": "GET request header."
   },
   "Request Param": {
     "prefix": "Param",
     "body": [
-      "Set user = $Get(%request.Data(\"user\", 1), \"\")"
-    ],
+      "Set ${1} = $Get(%request.Data(${2}, 1), \"\")"
+    ], 
     "description": "GET request parameter."
+  },
+  "Status Error": {
+    "prefix": "$$$ERROR",
+    "body": [
+      "$$\\$ERROR(${1:errorcode}, ${2}, ${3}, ...)"
+    ], 
+    "description": "Create error with arguments."
+  },
+  "Format Message": {
+    "prefix": "$$$FormatMessage",
+    "body": [
+      "$$\\$FormatMessage(${1:language}, ${2:domain}, ${3:id}, ${4:default}, ${5:arg1}, ${6:arg2}, ...)"
+    ], 
+    "description": "Get localized message with args."
+  },
+  "Format Text HTML": {
+    "prefix": "$$$FormatTextHTML",
+    "body": [
+      "$$\\$FormatTextHTML(${1:text}, ${2})"
+    ],
+    "description": "Replace and escape HTML."
+  },
+  "Format Text JS": {
+    "prefix": "$$$FormatTextJS",
+    "body": [
+      "$$\\$FormatTextJS(${1:text}, ${2})"
+    ],
+    "description": "Replace and escape JavaScript."
+  },
+  "Get Error Code": {
+    "prefix": "$$$GETERRORCODE",
+    "body": [
+      "$$\\$GETERRORCODE(${1:status})"
+    ],
+    "description": "Get error code."
+  },
+  "Get Error Message": {
+    "prefix": "$$$GETERRORMESSAGE",
+    "body": [
+      "$$\\$GETERRORMESSAGE(${1:status}, ${2:num})"
+    ],
+    "description": "Get part of error message."
+  },
+  "Is Error": {
+    "prefix": "$$$ISERR",
+    "body": [
+      "$$\\$ISERR(${1:status})"
+    ],
+    "description": "True if status is error."
+  },
+  "Is OK": {
+    "prefix": "$$$ISOK",
+    "body": [
+      "$$\\$ISOK(${1:status})"
+    ],
+    "description": "True if status is OK."
+  },
+  "Lower Case": {
+    "prefix": "$$$LOWER",
+    "body": [
+      "$$\\$LOWER(${1:string})"
+    ],
+    "description": "Convert to lowercase."
+  },
+  "Status OK": {
+    "prefix": "$$$OK",
+    "body": [
+      "$$\\$OK"
+    ],
+    "description": "Success status."
+  },
+  "Text": {
+    "prefix": "$$$Text",
+    "body": [
+      "$$\\$Text(${1:text}, ${2:domain}, ${3:lang})"
+    ],
+    "description": "Localized runtime message."
+  },
+  "Text HTML": {
+    "prefix": "$$$TextHTML",
+    "body": [
+      "$$\\$TextHTML(${1:text}, ${2:domain}, ${3:lang})"
+    ],
+    "description": "Localized HTML-escaped message."
+  },
+  "Text JS": {
+    "prefix": "$$$TextJS",
+    "body": [
+      "$$\\$TextJS(${1:text}, ${2:domain}, ${3:lang})"
+    ],
+    "description": "Localized JS-escaped message."
+  },
+  "Throw On Error": {
+    "prefix": "$$$ThrowOnError",
+    "body": [
+      "$$\\$ThrowOnError(${1:status})"
+    ],
+    "description": "Throw if error."
+  },
+  "THROWONERROR": {
+    "prefix": "$$$THROWONERROR",
+    "body": [
+      "$$\\$THROWONERROR(${1:status}, ${2:expression})"
+    ],
+    "description": "Throw if expression errors."
+  },
+  "Throw SQL Code": {
+    "prefix": "$$$ThrowSQLCODE",
+    "body": [
+      "$$\\$ThrowSQLCODE(${1:sqlcode}, ${2:message})"
+    ],
+    "description": "Throw SQL exception."
+  },
+  "Throw SQL If Error": {
+    "prefix": "$$$ThrowSQLIfError",
+    "body": [
+      "$$\\$ThrowSQLIfError(${1:sqlcode}, ${2:message})"
+    ],
+    "description": "Throw if SQL error."
+  },
+  "Throw Status": {
+    "prefix": "$$$ThrowStatus",
+    "body": [
+      "$$\\$ThrowStatus(${1:status})"
+    ],
+    "description": "Throw given status."
+  },
+  "Upper Case": {
+    "prefix": "$$$UPPER",
+    "body": [
+      "$$\\$UPPER(${1:string})"
+    ],
+    "description": "Convert to uppercase."
   }
 }
