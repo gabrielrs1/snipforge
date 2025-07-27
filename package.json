@@ -3,7 +3,7 @@
   "displayName": "SnipForge",
   "description": "Snippets for ObjectScript development.",
   "publisher": "GabrielSantos",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "engines": {
     "vscode": "^1.102.0"
   },
