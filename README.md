@@ -1,5 +1,7 @@
 # Snipforge
 
+![alt text](image.png)
+
 This extension provide some snippets of the code Intersystems IRIS for you.
 
 Use Ctrl + Space in your classes (objectscript) for view help codes.
