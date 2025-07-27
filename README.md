@@ -1,4 +1,4 @@
-# Snipforge
+# SnipForge
 
 ![alt text](image.png)
 
