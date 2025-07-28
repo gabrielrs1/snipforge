@@ -10,11 +10,11 @@ Use Ctrl + Space in your classes (objectscript) for view help codes.
 
 - When selecting a class method, a "Forge Test" option is available in the right-click menu.
 
-![alt text](start-test.gif)
+<img src="start-test.gif" width="500" height="300" alt="start-test">
 
 - In the class where you want to apply the method for testing, right-click and select "Paste Forge Test".
 
-![alt text](final-test.gif)
+<img src="final-test.gif" width="500" height="300" alt="start-test">
 
 ## XData
 - XData Map for message mapping.
