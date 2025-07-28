@@ -115,7 +115,7 @@
     "body": [
       "$$\\$THROWONERROR(statusCode, ${1}.%Save())"
     ],
-    "description": "Save an instance of teste.User."
+    "description": "Save an instance."
   },
   "Class Exists": {
     "prefix": "Class",
@@ -123,28 +123,28 @@
       "If (##class(${1}).IdxEmailExists(${2})) {",
       "}"
     ],
-    "description": "Check if an instance of teste.User exists by index email."
+    "description": "Check if an instance exist."
   },
   "Class Index Open": {
     "prefix": "Class",
     "body": [
       "Set ${1} = ##class(${2}).IdxEmailOpen(${3})"
     ],
-    "description": "Open an instance of teste.User by index email."
+    "description": "Open an instance by index."
   },
   "Class Open": {
     "prefix": "Class",
     "body": [
       "Set ${1} = ##class(${2}).%OpenId(${3})"
     ],
-    "description": "Open an instance of teste.User by ID."
+    "description": "Open an instance by ID."
   },
   "Class New": {
     "prefix": "Class",
     "body": [
       "Set ${1} = ##class(${2}).%New()"
     ],
-    "description": "Create a new instance of teste.User."
+    "description": "Create a new instance."
   },
   "Parse Array": {
     "prefix": "Parse",

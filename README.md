@@ -8,7 +8,7 @@ Use Ctrl + Space in your classes (objectscript) for view help codes.
 
 ## Generate test
 
-- When selecting a class method, a "Forge Test" option is available in the right-click menu.
+- When selecting a Method, a "Forge Test" option is available in the right-click menu.
 
 <img src="start-test.gif" width="500" height="300" alt="start-test">
 
@@ -53,11 +53,11 @@ Handle exceptions in a try-catch block.
 Get error text from status code.
 
 ## Class
-- Save an instance of teste.User.
-- Check if an instance of teste.User exists by index email.
-- Open an instance of teste.User by index email.
-- Open an instance of teste.User by ID.
-- Create a new instance of teste.User.
+- Save an instance.
+- Check if an instance exist.
+- Open an instance by index.
+- Open an instance by ID.
+- Create a new instance.
 
 ## Parse
 - Parse string from JSON to array.
