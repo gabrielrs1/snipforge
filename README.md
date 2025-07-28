@@ -6,6 +6,16 @@ This extension provide some snippets of the code Intersystems IRIS for you.
 
 Use Ctrl + Space in your classes (objectscript) for view help codes.
 
+## Generate test
+
+- When selecting a class method, a "Forge Test" option is available in the right-click menu.
+
+![alt text](start-test.gif)
+
+- In the class where you want to apply the method for testing, right-click and select "Paste Forge Test".
+
+![alt text](final-test.gif)
+
 ## XData
 - XData Map for message mapping.
 - XData Url for message mapping.
